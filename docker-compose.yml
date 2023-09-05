@@ -1,0 +1,27 @@
+services:
+  # traefik:
+  #     image: traefik:latest
+  #     command:
+  #       - --entrypoints.http.address=:80
+  #       - --entrypoints.https.address=:443
+  #       - --providers.docker=true
+  #       - --providers.docker.exposedbydefault=false
+  #     volumes:
+  #       - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     ports:
+  #       - "0.0.0.0:80:80"
+  #       - "0.0.0.0:443:443"
+
+  proxy:
+    image: nginx:alpine
+    volumes:
+      - ./proxy.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "0.0.0.0:80:80"
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.proxy.rule=Host(`example.com`)"
+    #   - "traefik.http.routers.proxy.entrypoints=http,https"
+    #   - "traefik.http.routers.proxy.tls=true"
+    #   - "traefik.http.routers.proxy.tls.certresolver=letsencrypt"
+    #   - "traefik.http.services.proxy.loadbalancer.server.port=80"
